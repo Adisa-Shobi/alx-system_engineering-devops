@@ -2,7 +2,7 @@
 # Clock counts like a conventional clock
 h=0
 m=1
-while [ $h -le 12 ]
+while [ $h -lt 12 ]
 do
     case $m in
 	1)
