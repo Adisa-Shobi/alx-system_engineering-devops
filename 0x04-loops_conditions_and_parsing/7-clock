@@ -2,11 +2,11 @@
 # Clock counts like a conventional clock
 h=0
 m=1
-while [ $h -lt 12 ]
+while [ $h -le 12 ]
 do
     case $m in
 	1)
-	    echo "Hour: " $h
+	    echo "Hour:" $h
 	    echo $m
 	    ;;
 	60)
