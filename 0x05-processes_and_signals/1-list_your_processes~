@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-# Return a list of all currently running processes
-top
