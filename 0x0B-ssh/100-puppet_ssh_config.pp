@@ -5,7 +5,6 @@ file_line { 'no_password_auth':
   ensure  => present,
   path    => '/etc/ssh/ssh_config',
   line    => '    PasswordAuthentication no',
-  match   => '*PasswordAuthentication yes',
   replace => true,
 }
 
