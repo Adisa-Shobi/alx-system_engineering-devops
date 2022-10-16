@@ -1,6 +1,7 @@
+# Adds file in /tmp
+
 file { '/tmp/school':
   path    => '/tmp/school',
-  ensure  => 'file',
   content => 'I love Puppet',
   group   => 'www-data',
   owner   => 'www-data',
