@@ -27,7 +27,7 @@ SERVER_CONFIG=\
 
 bash -c "echo -e '$SERVER_CONFIG' > /etc/nginx/sites-enabled/default"
 
-if pgrep -x nginx > /dev/null
+if [ "$(pgrep -c nginx)" -le 0 ]
 then
     service nginx restart
 else
