@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 # Installs and sets up dev environment for ngnix
 
+sudo apt-get update
 apt-get -y install nginx
 echo "Hello World!" > /var/www/html/index.html
-service nginx restart
+# sed -i "s/^\tlisten [0-9]* default_server;/\tlisten 80 default_server;/g" /etc/nginx/sites-av# ailable/default
+# sed -i "s/^\tlisten \[.*\].[0-9]* default_server;/\tlisten [::]:590 default_server;/g" /etc/n# ginx/sites-available/default
+if pgrep -x nginx > /dev/null
+then
+    service nginx restart
+else
+    service nginx start
+fi
