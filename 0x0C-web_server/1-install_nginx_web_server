@@ -4,8 +4,8 @@
 sudo apt-get update
 apt-get -y install nginx
 echo "Hello World!" > /var/www/html/index.html
-# sed -i "s/^\tlisten [0-9]* default_server;/\tlisten 80 default_server;/g" /etc/nginx/sites-av# ailable/default
-# sed -i "s/^\tlisten \[.*\].[0-9]* default_server;/\tlisten [::]:590 default_server;/g" /etc/n# ginx/sites-available/default
+sed -i "s/listen [0-9]* default_server;/listen 80 default_server;/g" /etc/nginx/sites-available/default
+sed -i "s/listen \[.*\].[0-9]* default_server;/listen [::]:80 default_server;/g" /etc/nginx/sites-available/default
 if pgrep -x nginx > /dev/null
 then
     service nginx restart
