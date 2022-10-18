@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-# Installs and sets up dev environment for ngnix with 301 redirect
-
-apt-get -y install nginx
-
-echo "Hello World!" > /var/www/html/index.html
-sed -i "s/server_name _;/server_name _;\n\trewrite ^\/redirect_me(.*)$ http:\/\/www.youtube.com permanent$1;/g" /etc/nginx/sites-available/default
-/etc/init.d/nginx restart
