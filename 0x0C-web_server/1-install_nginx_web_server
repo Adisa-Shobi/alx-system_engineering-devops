@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Installs and sets up dev environment for ngnix
 
-sudo apt-get update
+apt-get update
 apt-get -y install nginx
 echo "Hello World!" > /var/www/html/index.html
 sed -i "s/listen [0-9]* default_server;/listen 80 default_server;/g" /etc/nginx/sites-available/default
