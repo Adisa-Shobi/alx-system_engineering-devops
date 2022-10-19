@@ -6,23 +6,7 @@ apt-get -y install nginx
 echo "Hello World!" > /var/www/html/index.html
 # sed -i "s/listen [0-9]* default_server;/listen 80 default_server;/g" /etc/nginx/sites-available/default
 # sed -i "s/listen \[.*\].[0-9]* default_server;/listen [::]:80 default_server;/g" /etc/nginx/sites-available/default
-# CONFIG="server {
-#		listen 80 default_server;
-#              	listen [::]:80 default_server;
-#
-#		root /var/www/html;
-#
-#		index index.html index.htm index.nginx-debian.html;
-#
-#		server_name _;
-#
-#		location / {
-#			 try_files $uri $uri/ =404;
-#		}
-#	}"
-# echo "$CONFIG" > /etc/nginx/sites-available/default
-SERVICE="nginx"
-if pgrep -x "$SERVICE" > /dev/null
+if [ "$(pgrep -x 'nginx' | wc -l)" -ge 1 ]
 then
     service nginx restart
 else

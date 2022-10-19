@@ -19,12 +19,12 @@ SERVER_CONFIG=\
         location / {
                 try_files \$uri \$uri/ =404;
 	}
-        rewrite ^/redirect_me(.*)$ http://www.youtube.com/ permanent;
+        rewrite ^/redirect_me$ http://www.youtube.com/ permanent;
 }"
 
-echo -e "$SERVER_CONFIG" > /etc/nginx/sites-enabled/default
+echo -e '$SERVER_CONFIG' > /etc/nginx/sites-enabled/default
 
-if [ "$(pgrep 'nginx' | wc -l)" -ge 1 ]
+if [ "$(pgrep -c nginx)" -le 0 ]
 then
     service nginx restart
 else
