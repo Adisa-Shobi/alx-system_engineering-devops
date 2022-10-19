@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Installs and sets up dev environment for ngnix with 301 redirect
 
+apt-get update
 apt-get -y install nginx
 sudo ufw allow 'Nginx HTTP'
 mkdir -p /var/www/html/
@@ -12,22 +13,22 @@ echo "Ceci n'est pas une page" > /usr/share/nginx/html/custom_404.html
 # sed -i "s/server_name _;/server_name _;\n\trewrite ^\/redirect_me(.*)$ http:\/\/www.youtube.com permanent$1;\n\terror_page 404 \/custom_404.html;\n\tlocation = \/custom_404.html {\n\t\troot \/usr\/share\/nginx\/html;\n\t\tinternal;}/g" /etc/nginx/sites-available/default
 SERVER_CONFIG=\
 "server {
-        listen 80 default_server;
-        listen [::]:80 default_server;
+	 listen 80 default_server;
+         listen [::]:80 default_server;
 
-        root /var/www/html;
+         root /var/www/html;
 
-        index index.html index.htm index.nginx-debian.html;
-        server_name _;
-        location / {
-                try_files \$uri \$uri/ =404;
-        }
-        rewrite ^/redirect_me(.*)$ http://www.youtube.com/ permanent;
-	error_page 404 /custom_404.html;
-	location = /custom_404.html {
-		 root /usr/share/nginx/html;
-		 internal;
-	}
+         index index.html index.htm index.nginx-debian.html;
+         server_name _;
+         location / {
+         	  try_files \$uri \$uri/ =404;
+         }
+	 rewrite ^/redirect_me(.*)$ http://www.youtube.com/ permanent;
+	 error_page 404 /custom_404.html;
+	 location = /custom_404.html {
+	 	  root /usr/share/nginx/html;
+		  internal;
+	 }
 }"
 echo -e "$SERVER_CONFIG" > /etc/nginx/sites-available/default
 if [ "$(pgrep 'nginx' | wc -l)" -ge 1 ]
