@@ -1,24 +1,45 @@
 # Installs and configures an nginx server
-include stdlib
+
+exec { 'update packages':
+  command => 'sudo apt-get update',
+  path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+}
 
 package { 'nginx':
+  ensure   => installed,
   provider => 'apt',
 }
 
+exec { 'mkdir_html':
+  command => 'mkdir -p /var/www/html/',
+  path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+}
+
+exec { 'chmod_html':
+  command => 'sudo chmod -R 755 /var/www',
+  path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+}
+
+exec { 'create_sites-available':
+  command => 'mkdir -p /etc/nginx/sites-available/',
+  path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+}
+
 file { '/var/www/html/index.html':
-  ensure  => present,
   content => 'Hello World!',
 }
 
-file { '/etc/nginx/sites-available/default':
-  ensure => present,
+exec { 'config':
+  path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+  command => 'sudo echo -e "server {\n\t\tlisten 80 default_server;\n\t\tlisten [::]:80 default_server;\n\n\t\troot /var/www/html;\n\t\tindex index.html index.htm index.nginx-debian.html;\n\t\tserver_name _;\n\t\tlocation / {\n\t\ttry_files \$uri \$uri/ =404;\n\t\t}\n\t\trewrite ^/redirect_me(.*)$ http://www.youtube.com/ permanent;\n}" > /etc/nginx/sites-available/default'
 }
 
-file_line { 'server_name _;':
-  ensure => 'present',
-  path => '/etc/nginx/sites-available/default',
-  line   => "server_name _;\n\trewrite ^/redirect_me(.*)$ http://www.youtube.com\
- permanent$1;\n\terror_page 404 /custom_404.html;\n\tlocation \
-= /custom_404.html {\n\t\troot /usr/share/nginx/html;\n\t\tinternal;",
-  match  => 'server_name _;',
+service { 'service-mamager':
+  ensure => running,
+  name   => 'nginx',
+}
+
+exec {'restart':
+  command => 'sudo service nginx restart',
+  path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
 }
