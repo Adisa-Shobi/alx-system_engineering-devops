@@ -15,4 +15,9 @@ CONFIG=\
          rewrite ^/redirect_me(.*)$ http://www.youtube.com/ permanent;
 	 }"
 echo -e "$CONFIG" > /etc/nginx/sites-enabled/default
-service nginx restart
+if [ "$(pgrep -x 'nginx' | wc -l)" -ge 1 ]
+then
+    service nginx restart
+else
+    service nginx start
+fi
