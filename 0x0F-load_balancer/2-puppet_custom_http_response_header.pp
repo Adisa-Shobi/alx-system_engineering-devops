@@ -6,8 +6,8 @@ exec {'install nginx':
 }
 
 exec {'restore permissions':
-  command => 'sudo sed -i "/listen 80 default_server;/a add_header     X-Served-By \$HOSTNAME;" /etc/nginx/sites-available/default;',
-  path    => '/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/bin:/sbin'
+  command  => 'sudo sed -iE "/listen 80 default_server;/a      add_header X-Served-By \$hostname;" /etc/nginx/sites-available/default;',
+  provider => shell,
 }
 
 exec {'restart nginx':
