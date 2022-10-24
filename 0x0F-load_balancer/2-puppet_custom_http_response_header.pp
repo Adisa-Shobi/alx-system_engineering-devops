@@ -1,5 +1,10 @@
 # Configures nginx server by adding custom headers
 
+exec {'install nginx':
+  command => 'apt-get update;sudo apt-get -y install nginx',
+  path    => '/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/bin:/sbin'
+}
+
 exec {'change permissions':
   command => 'sudo chown $USER:$USER /etc/nginx/sites-available/default',
   path    => '/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/bin:/sbin'
