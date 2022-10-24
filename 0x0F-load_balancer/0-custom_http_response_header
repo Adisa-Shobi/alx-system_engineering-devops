@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 # Configures nginx with new response headers
+
+apt-get update
+apt-get -y install nginx
 CONFIG=\
 "server {
 	 listen 80 default_server;
