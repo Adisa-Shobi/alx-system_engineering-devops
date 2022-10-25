@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Corrects configuration of nginx server to resolve bugs
+
+sudo sed -iE "s/listen [0-9]* default_server;/listen 80 default_server;/" /etc/nginx/sites-available/default
+sudo sed -iE "s/listen \[::]:[0-9]* default_server[\w\s_]*;/listen [::]:390 default_server;/" /etc/nginx/sites-available/default

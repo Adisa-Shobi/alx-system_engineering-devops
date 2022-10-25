@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Corrects configuration of nginx server to resolve bugs
+
+sudo sed -iE "s/listen [0-9]* default_server;/listen 80 default_server;/" /etc/nginx/sites-enabled/default
+sudo sed -iE "s/listen \[::]:[0-9]* default_server ipv6only=on;/listen [::]:80 default_server;/" /etc/nginx/sites-enabled/default
+sudo rm /etc/nginx/sites-enabled/default?
+sudo service nginx restart
