@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# prints information about a domain name
+# prints information about a domain name and it's subdomain
 
 print_info () {
     result=$(dig "$2.$1" | grep -C1 'ANSWER SECTION:' | grep 'IN')
@@ -8,10 +8,11 @@ print_info () {
     echo "The subdomain ${2} is a $record_type record and points to $ip_address"
 }
 
-if [ "$2" ]
+if [ $# -eq 2 ]
 then
     print_info "$1" "$2"
-else
+elif [ $# -eq 1 ]
+then
     for val in 'www' 'lb-01' 'web-01' 'web-02'
     do
 	print_info "$1" "$val"
