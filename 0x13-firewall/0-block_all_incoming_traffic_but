@@ -1,3 +1,6 @@
-sudo ufw allow in 22
-sudo ufw allow in 443
-sudo ufw allow in 80
+#!/usr/bin/env bash
+# bash script configures firewall
+
+sudo ufw allow in ssh
+sudo ufw allow in https
+sudo ufw allow in http
