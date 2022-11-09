@@ -1,9 +1,6 @@
-#!/usr/bin/env bash
-# bash script configures firewall
-
 sudo apt-get -y install ufw
-sudo ufw default deny incoming
+yes | sudo ufw enable
+sudo ufw default deny incoming -y
 sudo ufw allow in ssh
 sudo ufw allow in https
 sudo ufw allow in http
-sudo ufw enable -y
