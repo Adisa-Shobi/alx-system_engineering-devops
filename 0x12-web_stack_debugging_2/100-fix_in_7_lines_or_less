@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # changes the user running nginx from superuser(root) to nginx
-sudo service nginx stop
 sudo sed -i "s/\([ :]\)80 /\18080 /" /etc/nginx/sites-enabled/default
 sudo pkill apache2
 sudo chown -R nginx:nginx /etc/nginx/
