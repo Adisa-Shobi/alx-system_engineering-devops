@@ -25,9 +25,10 @@ if __name__ == "__main__":
             num_of_done_tasks,
             total_num_of_tasks)
         with open("{}.csv".format(user_id), 'w') as csv_file:
-            todo_writer = csv.writer(csv_file, delimiter=",")
             for task in todo_data:
-                todo_writer.writerow(['{}'.format(task["userId"]),
-                                      '{}'.format(employee_name),
-                                      '{}'.format(task['completed']),
-                                      '{}'.format(task['title'])])
+                csv_file.write('"{}","{}","{}","{}"\n'.format(
+                    user_id,
+                    employee_name,
+                    task.get('completed'),
+                    task.get('title')
+                ))
