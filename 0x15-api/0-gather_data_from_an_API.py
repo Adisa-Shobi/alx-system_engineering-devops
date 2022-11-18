@@ -1,9 +1,10 @@
-#!/usr/bin/env python3
-# Test request to parse API's
+#!/usr/bin/python3
+''' Test request to parse API's
+'''
+
+
 import requests
 import sys
-import json
-
 
 api_endpoint = "https://jsonplaceholder.typicode.com/"
 user_id = sys.argv[1]
