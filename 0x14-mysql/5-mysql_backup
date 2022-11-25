@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Creates backup of mysql database
+
+now=$(date +"%d-%m-%Y");
+sudo mysqldump -u root -p"$1" --all-databases | sudo tee backup.sql
+tar -cvzf "$now".tar.gz backup.sql
