@@ -14,8 +14,8 @@ def top_ten(subreddit):
     if subreddit is None or not isinstance(subreddit, str):
         return(None)
     endpoint = 'https://www.reddit.com'
-    headers = {'user-agent': 'Mozilla/5.0 \
-(Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0'}
+    headers = {'user-agent': '0x16-api_advanced:project:\
+v1.0.0 (by /u/shobi_ola)'}
     params = {'limit': 10}
     with requests.get('{}/r/{}/top.json'.format(endpoint, subreddit),
                       allow_redirects=False,
