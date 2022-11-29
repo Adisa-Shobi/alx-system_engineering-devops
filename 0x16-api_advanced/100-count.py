@@ -11,6 +11,8 @@ def count_words(subreddit, word_list, fullname="", count=0, hash_table={}):
     Return:
         None - if subreddit is invalid
     '''
+    if subreddit is None or not isinstance(subreddit, str):
+        return
     url = 'https://www.reddit.com/r/{}/hot/.json'.format(subreddit)
     params = {'after': fullname, 'limit': 100, 'count': count}
     headers = {'user-agent': 'Mozilla/5.0 \

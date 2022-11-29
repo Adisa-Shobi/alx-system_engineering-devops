@@ -12,7 +12,7 @@ def top_ten(subreddit):
         None -  if the subreddit is invalid
     '''
     if subreddit is None or not isinstance(subreddit, str):
-        return(None)
+        print(None)
     endpoint = 'https://www.reddit.com'
     headers = {'user-agent': '0x16-api_advanced:project:\
 v1.0.0 (by /u/shobi_ola)'}
