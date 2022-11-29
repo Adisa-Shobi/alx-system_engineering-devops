@@ -17,7 +17,7 @@ def top_ten(subreddit):
     headers = {'user-agent': '0x16-api_advanced:project:\
 v1.0.0 (by /u/shobi_ola)'}
     params = {'limit': 10}
-    info = requests.get('{}/r/{}/top.json'.format(endpoint, subreddit),
+    info = requests.get('{}/r/{}/hot.json'.format(endpoint, subreddit),
                         allow_redirects=False,
                         headers=headers,
                         params=params)
